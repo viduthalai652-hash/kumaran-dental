@@ -1,0 +1,200 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== CSS Custom Properties ===== */
+:root {
+  --pearl-cream: #F5F0EB;
+  --pearl-offwhite: #E5F3FD;
+  --pearl-charcoal: #1A1A1A;
+  --pearl-dark: #0D0D0D;
+  --pearl-lime: #C8FF00;
+  --pearl-lavender: #D4C5F9;
+  --pearl-peach: #FFD5C2;
+  --pearl-mint: #E8F5EE;
+  --pearl-muted: #8A8A8A;
+  --pearl-warm: #E8E0D8;
+
+  /* Blue dental theme */
+  --dental-blue: #5AAAF5;
+  --dental-blue-dark: #3B7DD8;
+  --dental-blue-light: #7EC8FF;
+  --dental-blue-pale: #EBF4FF;
+  --dental-blue-mid: #4A90E2;
+  --dental-lime: #C8FF00;
+
+  --font-display: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* ===== Base Styles ===== */
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background-color: var(--pearl-offwhite);
+    color: var(--pearl-charcoal);
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: var(--pearl-lime);
+    color: var(--pearl-dark);
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--pearl-cream);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--pearl-charcoal);
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--pearl-muted);
+  }
+}
+
+/* ===== Component Utilities ===== */
+@layer components {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .pearl-section {
+    @apply relative w-full overflow-hidden;
+  }
+
+  .pearl-container {
+    @apply mx-auto w-full max-w-[1440px] px-5 md:px-8 lg:px-12;
+  }
+
+  .pearl-grid {
+    @apply grid grid-cols-4 gap-4 md:grid-cols-8 lg:grid-cols-12 lg:gap-6;
+  }
+
+  /* Magnetic button base */
+  .magnetic-btn {
+    @apply relative inline-flex items-center justify-center overflow-hidden rounded-full transition-all;
+  }
+
+  .magnetic-btn::before {
+    content: '';
+    @apply absolute inset-0 rounded-full transition-transform duration-500 ease-expo-out;
+    transform: scale(0);
+    background: var(--pearl-lime);
+  }
+
+  .magnetic-btn:hover::before {
+    transform: scale(1);
+  }
+
+  /* Text mask reveal */
+  .text-mask {
+    @apply overflow-hidden;
+  }
+
+  .text-mask > * {
+    @apply translate-y-full;
+  }
+
+  /* Smooth image reveal */
+  .img-reveal {
+    @apply relative overflow-hidden;
+  }
+
+  .img-reveal::after {
+    content: '';
+    @apply absolute inset-0 bg-pearl-cream transition-transform duration-700 ease-expo-out;
+    transform-origin: left;
+  }
+
+  .img-reveal.revealed::after {
+    transform: scaleX(0);
+    transform-origin: right;
+  }
+
+  /* Animated underline */
+  .animated-underline {
+    @apply relative;
+  }
+
+  .animated-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 h-[1px] w-0 bg-current transition-all duration-500 ease-expo-out;
+  }
+
+  .animated-underline:hover::after {
+    @apply w-full;
+  }
+}
+
+/* ===== Utility Overrides ===== */
+@layer utilities {
+  .writing-vertical {
+    writing-mode: vertical-rl;
+  }
+
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
+  /* Hide scrollbar for horizontal scroll sections */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* ===== Reduced Motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ===== Focus Styles ===== */
+:focus-visible {
+  outline: 2px solid var(--pearl-lime);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* ===== Custom Cursor (desktop only) ===== */
+@media (pointer: fine) {
+  .custom-cursor-area {
+    cursor: none;
+  }
+}
